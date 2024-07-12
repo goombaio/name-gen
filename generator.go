@@ -25,6 +25,7 @@ import (
 // Generator ...
 type Generator interface {
 	Generate() string
+	Generate3() string
 }
 
 // NameGenerator ...
@@ -40,6 +41,12 @@ func (rn *NameGenerator) Generate() string {
 	randomName := fmt.Sprintf("%v-%v", randomAdjective, randomNoun)
 
 	return randomName
+}
+
+// Generate3 ...
+// Generate 3 words with last one being a 4 digit number
+func (rn *NameGenerator) Generate3() string {
+	return fmt.Sprintf("%v-%v", rn.Generate(), rn.random.Intn(9999-1000+1)+1000)
 }
 
 // NewNameGenerator ...

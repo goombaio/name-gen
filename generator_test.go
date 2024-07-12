@@ -18,6 +18,7 @@
 package namegenerator
 
 import (
+	"strings"
 	"testing"
 	"time"
 )
@@ -34,5 +35,18 @@ func TestNameGenerator_Generate(t *testing.T) {
 	name := nameGenerator.Generate()
 	if name == "" {
 		t.Fatalf("Expected a new name but got a blank string")
+	}
+}
+
+func TestNameGenerator_Generate3(t *testing.T) {
+	seed := time.Now().UTC().UnixNano()
+	nameGenerator := NewNameGenerator(seed)
+
+	name := nameGenerator.Generate3()
+	if name == "" {
+		t.Fatalf("Expected a new name but got a blank string")
+	}
+	if len(strings.Split(name, "-")) != 3 {
+		t.Fatalf("Expected a name with three words but did not get it")
 	}
 }
